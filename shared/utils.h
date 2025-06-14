@@ -51,5 +51,5 @@
     void print_binary_file_details          ();
     void my_exit                            (int exit_value);
     void convertToUppercase(char *givenStr);
-
+    void fault_memory (uint64_t mask, op_t fault_op, uint64_t in,uint64_t *out,uint64_t size, FILE* f);
 #endif

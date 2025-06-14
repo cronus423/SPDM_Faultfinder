@@ -1,0 +1,116 @@
+{
+    "sections": [
+        {
+            "name": ".note.gnu.build-id",
+            "vma": "00000000000101c8",
+            "file_offset": "000001c8",
+            "size": "00000024"
+        },
+        {
+            "name": ".note.ABI-tag",
+            "vma": "00000000000101ec",
+            "file_offset": "000001ec",
+            "size": "00000020"
+        },
+        {
+            "name": ".rela.dyn",
+            "vma": "0000000000010210",
+            "file_offset": "00000210",
+            "size": "00000210"
+        },
+        {
+            "name": ".text",
+            "vma": "0000000000010420",
+            "file_offset": "00000420",
+            "size": "000f58ea"
+        },
+        {
+            "name": "__libc_freeres_fn",
+            "vma": "0000000000105d0a",
+            "file_offset": "000f5d0a",
+            "size": "00000862"
+        },
+        {
+            "name": ".rodata",
+            "vma": "0000000000106570",
+            "file_offset": "000f6570",
+            "size": "00036ff4"
+        },
+        {
+            "name": ".eh_frame",
+            "vma": "000000000013d568",
+            "file_offset": "0012d568",
+            "size": "0000330c"
+        },
+        {
+            "name": ".gcc_except_table",
+            "vma": "0000000000140874",
+            "file_offset": "00130874",
+            "size": "000002cb"
+        },
+        {
+            "name": ".preinit_array",
+            "vma": "00000000001427e8",
+            "file_offset": "001317e8",
+            "size": "00000008"
+        },
+        {
+            "name": ".init_array",
+            "vma": "00000000001427f0",
+            "file_offset": "001317f0",
+            "size": "00000008"
+        },
+        {
+            "name": ".fini_array",
+            "vma": "00000000001427f8",
+            "file_offset": "001317f8",
+            "size": "00000008"
+        },
+        {
+            "name": ".data.rel.ro",
+            "vma": "0000000000142800",
+            "file_offset": "00131800",
+            "size": "000a2800"
+        },
+        {
+            "name": ".data",
+            "vma": "00000000001e5000",
+            "file_offset": "001d4000",
+            "size": "00004850"
+        },
+        {
+            "name": "__libc_subfreeres",
+            "vma": "00000000001e9850",
+            "file_offset": "001d8850",
+            "size": "00000050"
+        },
+        {
+            "name": "__libc_IO_vtables",
+            "vma": "00000000001e98a0",
+            "file_offset": "001d88a0",
+            "size": "00000690"
+        },
+        {
+            "name": "__libc_atexit",
+            "vma": "00000000001e9f30",
+            "file_offset": "001d8f30",
+            "size": "00000008"
+        },
+        {
+            "name": ".got",
+            "vma": "00000000001e9f38",
+            "file_offset": "001d8f38",
+            "size": "00000480"
+        },
+        {
+            "name": ".sdata",
+            "vma": "00000000001ea3b8",
+            "file_offset": "001d93b8",
+            "size": "00000008"
+        }
+    ],
+    "max_vma_plus_size": {
+        "name": "__libc_freeres_ptrs",
+        "max_vma_plus_size": "0x2f6968"
+    }
+}

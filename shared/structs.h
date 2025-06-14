@@ -13,7 +13,7 @@
     typedef enum {eNOT_eSET_op=0,eAND_op=1, eOR_op=2, eXOR_op=3, eADD_op=4, eSKIP_op=5, eSET_op=6,eCLEAR_op=7,eFLIP_op=8} op_t;
     typedef enum {eNONE_lsm, eREPEAT_lsm, eREVERT_lsm} lifespan_mode;
     typedef enum {eNONE_rm,eGOLDEN_rm, eGOLDENRUN_FULL_rm, eMEMHOOK_rm,eCOUNT_INSTRUCTIONS_rm,eSTATS_rm, eFAULT_rm, eTEST_rm, eTIMING_CHECKPOINT_rm, eDEBUG_rm} run_mode;
-    typedef enum {reg_ft,instruction_pointer_ft,instruction_ft} fault_target;
+    typedef enum {reg_ft,instruction_pointer_ft,instruction_ft, memory_ft} fault_target;
     typedef enum {NONE_rs,STARTED_rs,
                     STARTED_FROM_CHECKPOINT_rs,
                     FAULTED_rs,EQUIVALENT_rs, TIMED_OUT_rs, 

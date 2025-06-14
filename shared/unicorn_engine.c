@@ -11,6 +11,7 @@
 #include "structs.h"
 #include "fileio.h"
 #include "configuration.h"
+#include "cJSON.h"
 #define SKIP_CHECKING_RETURN_FROM_SET_CPU_MODEL
 
 void my_uc_emu_stop(uc_engine* uc)
@@ -343,6 +344,97 @@ void uc_engine_set_new_register_inputs(uc_engine *uc, current_run_state_t *curre
     }
 }
 
+uc_err map_segments_to_unicorn(uc_engine *uc, const char *json_file, uint8_t *code_buffer) 
+{
+    uc_err err = UC_ERR_OK; // 初始化为 OK 状态
+
+    // 打开 JSON 文件
+    FILE *fp = fopen(json_file, "r");
+    if (!fp) {
+        perror("Failed to open JSON file");
+        return UC_ERR_NOMEM;
+    }
+    char buffer[1024];  // 定义一个缓冲区，用于存储读取的内容
+
+    // 读取第一行
+    // 读取 JSON 文件内容
+    //fseek(fp, 0, SEEK_END);
+    if (fseek(fp, 0, SEEK_END) != 0) 
+    {
+        perror("Failed to seek to end of file");
+        return UC_ERR_NOMEM;
+    }
+    long json_size = ftell(fp);
+    rewind(fp);
+
+    char *json_data = malloc(json_size + 1);
+    if (!json_data) {
+        perror("Failed to allocate memory for JSON");
+        fclose(fp);
+        return UC_ERR_NOMEM;
+    }
+
+    fread(json_data, 1, json_size, fp);
+    json_data[json_size] = '\0';
+    fclose(fp);
+
+    // 解析 JSON
+    cJSON *root = cJSON_Parse(json_data);
+    if (!root) {
+        fprintf(stderr, "Error parsing JSON: %s\n", cJSON_GetErrorPtr());
+        free(json_data);
+        return UC_ERR_ARG;
+    }
+
+    // 提取 sections 数组
+    cJSON *sections = cJSON_GetObjectItem(root, "sections");
+    if (!sections || !cJSON_IsArray(sections)) {
+        fprintf(stderr, "Error: 'sections' is not an array in JSON\n");
+        cJSON_Delete(root);
+        free(json_data);
+        return UC_ERR_ARG;
+    }
+    // 遍历 JSON 数组
+    cJSON *section;
+    cJSON_ArrayForEach(section, sections) 
+    {
+        const char *name = cJSON_GetObjectItem(section, "name")->valuestring;
+        const char *vma_str = cJSON_GetObjectItem(section, "vma")->valuestring;
+        const char *file_offset_str = cJSON_GetObjectItem(section, "file_offset")->valuestring;
+        const char *size_str = cJSON_GetObjectItem(section, "size")->valuestring;
+
+        if (!vma_str || !file_offset_str || !size_str) {
+            fprintf(stderr, "Error: Invalid JSON structure for section %s\n", name ? name : "unknown");
+            err = UC_ERR_ARG; // 设置错误状态但不退出
+            continue;
+        }
+
+        // 转换十六进制字符串为整数
+        uint64_t vma = strtoull(vma_str, NULL, 16);
+        uint64_t file_offset = strtoull(file_offset_str, NULL, 16);
+        uint64_t size = strtoull(size_str, NULL, 16);
+        printf("Mapped segment %s will be writen to: vma=0x%llx, file_offset=0x%llx, size=0x%llx\n",
+               name, vma, file_offset, size);
+        // 写入到 Unicorn 内存
+        err = uc_mem_write(uc, vma, code_buffer + file_offset, size);
+        if (err != UC_ERR_OK) {
+            fprintf(stderr, "Error: Failed to write segment %s to Unicorn memory at 0x%llx: %s\n",
+                    name, vma, uc_strerror(err));
+            printf("Error: Failed to write segment %s to Unicorn memory at 0x%llx: %s\n",
+                    name, vma, uc_strerror(err));
+            break; // 退出循环并返回错误
+        }
+
+
+    }
+
+    // 清理
+    cJSON_Delete(root);
+    free(json_data);
+
+    return err; // 返回最后的状态
+}
+
 void uc_engine_load_code_into_memory(uc_engine *uc, const char *code_buffer, size_t filesize)
 {
     #ifdef DEBUG
@@ -352,10 +444,12 @@ void uc_engine_load_code_into_memory(uc_engine *uc, const char *code_buffer, siz
         printf_debug("code_offset: 0x%" PRIx64 "\n",binary_file_details->code_offset);
         printf_debug("filesize: 0x%" PRIx64 ", (%llu) bytes\n",filesize,filesize);
     #endif
-    uc_err err=uc_mem_write(uc, binary_file_details->memory_main.address,
-                                code_buffer + binary_file_details->code_offset,
-                                filesize - binary_file_details->code_offset);
-
+    const char *json_file = "demos/spdm_individual/bins/useful_information.json";
+    // uc_err err=uc_mem_write(uc, binary_file_details->memory_main.address,
+    //                             code_buffer + binary_file_details->code_offset,
+    //                             filesize - binary_file_details->code_offset);
+    
+    uc_err err = map_segments_to_unicorn (uc, json_file, code_buffer);
     if (err != UC_ERR_OK)
     {
         fprintf(stderr, "Failed to write code to memory, quit!\n");
@@ -557,6 +651,17 @@ void my_uc_mem_map(uc_engine *uc, uint64_t address, size_t size, uint32_t perms,
         fprintf(stderr, "Possible reasons include: overlapping memory regions or too small size.\n");
         my_exit(-1);
     }
+    uint8_t *zero_buffer = calloc(size, 1);  // 分配一段全 0 的缓冲区
+    err = uc_mem_write(uc, address, zero_buffer,size);
+    if (err != UC_ERR_OK) {
+        printf("Failed to initialize memory: %s\n", uc_strerror(err));
+        free(zero_buffer);
+        my_exit(-1);
+    }
+    else
+    {
+        printf("inilization memory map\n");
+    }
 }
 
 void uc_engine_open_and_mem_map(uc_engine **uc,current_run_state_t* current_run_state,char* desc)
@@ -595,7 +700,7 @@ void uc_engine_open_and_mem_map(uc_engine **uc,current_run_state_t* current_run_
 
     // MAIN MEMORY
     my_uc_mem_map(*uc, binary_file_details->memory_main.address, binary_file_details->memory_main.size, UC_PROT_ALL,desc);
-    
+
     // MAIN OTHER REGIONS
     for (int i=0; i<binary_file_details->memory_other_count; i++)
     {
@@ -619,7 +724,7 @@ void uc_engine_open_and_mem_map(uc_engine **uc,current_run_state_t* current_run_
 
 
 
-void uc_engine_create_hooks(uc_engine *uc, current_run_state_t *current_run_state)
+void uc_engine_create_hooks(uc_engine *uc, current_run_state_t *current_run_state,int debug_personal)
 {
     #ifdef DEBUG
         printf_debug("uc_engine_create_hooks\n");
@@ -667,6 +772,11 @@ void uc_engine_create_hooks(uc_engine *uc, current_run_state_t *current_run_stat
 
     #ifdef PRINTINSTRUCTIONS
         my_uc_hook_add("hk_print_instructions",uc, &current_run_state->hk_print_instructions, UC_HOOK_CODE, hook_code_print_instructions, current_run_state,1,0);
+    #else
+        if(debug_personal)
+        {
+            my_uc_hook_add("hk_print_instructions",uc, &current_run_state->hk_print_instructions, UC_HOOK_CODE, hook_code_print_instructions, current_run_state,1,0);
+        }
     #endif
 
     // Hard stops - areas of the program that you shouldn't get to without a fault.
@@ -700,13 +810,13 @@ void uc_engine_insert_patches(uc_engine *uc,current_run_state_t* current_run_sta
     }
 }
 
-void my_uc_engine_setup(uc_engine **uc, current_run_state_t* current_run_state,char* desc)
+void my_uc_engine_setup(uc_engine **uc, current_run_state_t* current_run_state,char* desc,int debug_personal)
 {
     #ifdef DEBUG
         printf_debug("my_uc_engine_setup\n");
     #endif
     uc_engine_open_and_mem_map(uc,current_run_state,desc);
-    uc_engine_create_hooks(*uc,current_run_state);
+    uc_engine_create_hooks(*uc,current_run_state,debug_personal);
     uc_engine_load_code_into_memory(*uc, binary_file_details->code_buffer ,binary_file_details->code_buffer_size);
     uc_engine_insert_patches(*uc,current_run_state);
 

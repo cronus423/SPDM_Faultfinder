@@ -138,7 +138,7 @@ void hook_count_instructions(uc_engine *uc, uint64_t address, uint64_t size, voi
 
     #ifdef DEBUG
         //printf_debug("hook_count_instructions. Address: %" PRIx64 ". Size: %li. Count: %li\n",address,size,current_run_state->instruction_count);
-        printf("%" PRId64 ".",current_run_state->instruction_count);
+        //printf("%" PRId64 ".",current_run_state->instruction_count);
     #endif
     current_run_state->last_address=address;
 
@@ -235,7 +235,7 @@ void hook_code_print_instructions(uc_engine *uc, uint64_t address, uint64_t size
     current_run_state_t *current_run_state=(current_run_state_t *)user_data;
 
     #ifdef DEBUG
-        printf_debug("hook_code_print_instructions. Address: %" PRIx64 ". Count: %li\n",address,current_run_state->instruction_count);
+        //printf_debug("hook_code_print_instructions. Address: %" PRIx64 ". Count: %li\n",address,current_run_state->instruction_count);
     #endif
 
     // Print the opcodes and address and counters
@@ -260,32 +260,47 @@ void hook_code_print_instructions(uc_engine *uc, uint64_t address, uint64_t size
                     printf ("hit:%04lli. ", address_hit(current_run_state->address_hit_counter,address));
                 }
             }
+            fprintf(current_run_state->file_fprintf, "0x%08llx ",address);
+            for (int i=0;i<size;i++)
+            {
+                fprintf(current_run_state->file_fprintf,"%02x ", tmp[i]);
+            }
+            if (current_run_state->display_disassembly && binary_file_details->my_cs_arch != MY_CS_ARCH_NONE)
+            {
+                // Can be turned off to save time - although I've not done the time calculations to see if it saves much time
+                // uses capstone to disassemble and print the opcodes
+                disassemble_instruction_and_print(current_run_state->file_fprintf,tmp,size);
+            }
+            else
+            {
+                fprintf(current_run_state->file_fprintf,"\n");
+            }
         }
-        else
-        {
-            // no counter or hit count if outside of faulting range.
-            fprintf(current_run_state->file_fprintf, "~~~~~~~~ ");
-        }
+    //     else
+    //     {
+    //         // no counter or hit count if outside of faulting range.
+    //         fprintf(current_run_state->file_fprintf, "~~~~~~~~ ");
+    //     }
 
 
 
-        fprintf(current_run_state->file_fprintf, "0x%08llx ",address);
-        for (int i=0;i<size;i++)
-        {
-            fprintf(current_run_state->file_fprintf,"%02x ", tmp[i]);
-        }
+    //    fprintf(current_run_state->file_fprintf, "0x%08llx ",address);
+    //     for (int i=0;i<size;i++)
+    //    {
+    //        fprintf(current_run_state->file_fprintf,"%02x ", tmp[i]);
+    //    }
 
 
-        if (current_run_state->display_disassembly && binary_file_details->my_cs_arch != MY_CS_ARCH_NONE)
-        {
-            // Can be turned off to save time - although I've not done the time calculations to see if it saves much time
-            // uses capstone to disassemble and print the opcodes
-            disassemble_instruction_and_print(current_run_state->file_fprintf,tmp,size);
-        }
-        else
-        {
-            fprintf(current_run_state->file_fprintf,"\n");
-        }
+    //     if (current_run_state->display_disassembly && binary_file_details->my_cs_arch != MY_CS_ARCH_NONE)
+    //     {
+    //         // Can be turned off to save time - although I've not done the time calculations to see if it saves much time
+    //         // uses capstone to disassemble and print the opcodes
+    //         disassemble_instruction_and_print(current_run_state->file_fprintf,tmp,size);
+    //     }
+    //     else
+    //     {
+    //         fprintf(current_run_state->file_fprintf,"\n");
+    //     }
     }
     else
     {

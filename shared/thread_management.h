@@ -25,6 +25,12 @@ typedef struct _context_and_thread_num_t
     int thread_num;
 } context_and_thread_num_t;
 
+typedef struct _target_context_and_thread_num_t
+{
+    uint64_t address;
+    consume_context_t* context;
+    int thread_num;
+} target_context_and_thread_num_t;
 
 void initialise_consume_context(consume_context_t *context,instruction_range_fault_t *instruction_range_fault,current_run_state_t* current_run_state);
 

@@ -223,6 +223,9 @@ void print_fault_rule_no_newline( FILE *fd,fault_rule_t *fault_rule)
         case instruction_ft:
             fprintf(fd,"Instruction. Mask: 0x%016llx. ",fault_rule->mask);
             break;
+        case memory_ft:
+            fprintf(fd,"Instruction. Mask: 0x%016llx. ",fault_rule->mask);
+            break;
         default:
             fprintf(stderr, "No valid target specified unable to print fault fule.\n");
             my_exit(-1);
@@ -516,6 +519,36 @@ void fault_instruction (uint64_t mask, op_t fault_op, uint8_t* in,uint8_t* out,u
                 my_exit(-1);
         }   
     }
+}
+
+void fault_memory (uint64_t mask, op_t fault_op, uint64_t in,uint64_t *out,uint64_t size, FILE* f)
+{
+    if ((mask >> ((size*8)-1)) > 1)
+    {
+        fprintf_output(f,"Warning - the Mask 0x%" PRIx64 " is larger than the instruction - so some bytes in the mask will be ingored\n",mask);
+    }
+    ///TODOTODO think about endianness - what if the mask is too small??
+        switch (fault_op)
+        {   
+            case eAND_op:
+                *out=in & mask;
+                break;
+            case eOR_op:
+                *out=in| mask;
+                break;
+            case eXOR_op:
+                *out=in ^ mask;
+                break;
+            case eADD_op:
+                *out=in + mask;
+                break;
+            case eSET_op:
+                *out=mask;
+                break;
+            default:
+                fprintf(stderr, "Operation %s is not valid for faulting the code.\n",operation_to_string(fault_op));
+                my_exit(-1);
+        }   
 }
 
 uint64_t IP_fault_skip (op_t fault_op, uint64_t tmp,uint64_t size)

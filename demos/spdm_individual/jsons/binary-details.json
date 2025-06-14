@@ -1,0 +1,50 @@
+{
+    "cpu":"BASE32",
+    "binary filename" : "demos/spdm_individual/bins/spdm_individual_emu_strip",
+    "unicorn arch"    :"riscv",
+    "unicorn mode"    :"RISCV64",
+    "capstone arch"   :"riscv",
+    "capstone mode"   :"riscv64",
+    "memory address"  :"0x10000",
+    "memory size"     :"0x800000",
+    "other memory"    :
+    [
+        {
+            "address"   : "0x20000000",
+            "size"      :     "0x4000"
+        }  
+    ],
+    "stack address" : "0x820000",
+    "stack size"    : "0x200000",
+    "code offset"   : "0x0000",
+    "code start"    : "0x32d6",
+    "code end"      : "0x3324",
+    "fault start"   : "0xcb4e",
+    "fault end"     : "0xcf4a",
+    "set memory"    : 
+    [
+
+    ],
+    "set registers"   :
+    [
+    ],
+    "outputs"    : 
+    [
+        {   
+            "location"      : "register",
+            "address"       : "",
+            "register"      : "x10",
+            "length"        : "16",
+            "offset"        : ""
+        } 
+    ],
+    "skips":
+    [
+        { 
+            "address"       : "0x3020",
+            "bytes"         : "0x1f2"
+        }
+    ],
+    "timeout":"0",
+    "filter results": "no"
+}   

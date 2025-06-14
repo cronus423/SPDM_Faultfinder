@@ -1,0 +1,67 @@
+
+~~~ Run details  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ >> json filename:          demos/spdm_individual/jsons/binary-details.json
+ >> run mode:               fault
+ >> Output directory Name:  demos/spdm_individual/outputs/
+ >> Threads:                1
+ >> fault model filename :  demos/spdm_individual/faultmodels/small-riscv.txt
+ >> Start from checkpoint:  No
+ >> Max instructions:       4000000000
+ >> Stop on equivalence:    No
+ >> Time it:                No
+ >> Display disassembly:    Yes
+Binary file to run: demos/spdm_individual/bins/spdm_individual_emu_strip
+ >> Note: No 'stack start' - automatically setting it to: 0xa20000
+ >> Note: No patched instructions.
+								 >> Debug: current_run_state_init - all hooks set to zero.
+WARNING: We are not checking the return value from set cpu model, because it errors on Tricore for some reason
+
+~~~ FAULTS TO EMULATE  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fault: 39993-39993
+  Memory: 0xa9af81ee
+    Opcode filter: ALL 
+	Lifespan: 0 
+	  XOR operation. 
+		
+								 >> Debug: my_uc_engine_setup
+								 >> Debug: uc_engine_open_and_mem_map. uc: 0x555556cd8f00
+								 >> Debug: uc_mem_map: Address: 0x820000,  size: 0x200000
+inilization memory map
+								 >> Debug: uc_mem_map: Address: 0x10000,  size: 0x800000
+inilization memory map
+								 >> Debug: uc_mem_map: Address: 0x20000000,  size: 0x4000
+inilization memory map
+								 >> Debug: uc_engine_create_hooks
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce15b0, hk_intr - 0x1 0x0
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce16f0, hk_memory_invalid - 0x1 0x0
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce1920, hk_instruction_invalid - 0x1 0x0
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce1ab0, hk_end_address - 0x13324 0x13324
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce1c40, hk_start_address - 0x132d6 0x132d6
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce1dd0, hk_skips - 0x13020 0x13020
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce1f60, hk_start_faults - 0x1cb4e 0x1cb4e
+								 >> Debug: my_uc_hook_add. uc_hook: 555556ce20f0, hk_stop_faults - 0x1cf4a 0x1cf4a
+								 >> Debug: writing code into memory:
+								 >> Debug: memory_main.address: 0x10000
+								 >> Debug: code_buffer: ELF 
+								 >> Debug: code_offset: 0x0
+								 >> Debug: filesize: 0x2131e0, (2175456) bytes
+Mapped segment .note.gnu.build-id will be writen to: vma=0x101c8, file_offset=0x1c8, size=0x24
+Mapped segment .note.ABI-tag will be writen to: vma=0x101ec, file_offset=0x1ec, size=0x20
+Mapped segment .rela.dyn will be writen to: vma=0x10210, file_offset=0x210, size=0x210
+Mapped segment .text will be writen to: vma=0x10420, file_offset=0x420, size=0xf58ea
+Mapped segment __libc_freeres_fn will be writen to: vma=0x105d0a, file_offset=0xf5d0a, size=0x862
+Mapped segment .rodata will be writen to: vma=0x106570, file_offset=0xf6570, size=0x36ff4
+Mapped segment .eh_frame will be writen to: vma=0x13d568, file_offset=0x12d568, size=0x330c
+Mapped segment .gcc_except_table will be writen to: vma=0x140874, file_offset=0x130874, size=0x2cb
+Mapped segment .preinit_array will be writen to: vma=0x1427e8, file_offset=0x1317e8, size=0x8
+Mapped segment .init_array will be writen to: vma=0x1427f0, file_offset=0x1317f0, size=0x8
+Mapped segment .fini_array will be writen to: vma=0x1427f8, file_offset=0x1317f8, size=0x8
+Mapped segment .data.rel.ro will be writen to: vma=0x142800, file_offset=0x131800, size=0xa2800
+Mapped segment .data will be writen to: vma=0x1e5000, file_offset=0x1d4000, size=0x4850
+Mapped segment __libc_subfreeres will be writen to: vma=0x1e9850, file_offset=0x1d8850, size=0x50
+Mapped segment __libc_IO_vtables will be writen to: vma=0x1e98a0, file_offset=0x1d88a0, size=0x690
+Mapped segment __libc_atexit will be writen to: vma=0x1e9f30, file_offset=0x1d8f30, size=0x8
+Mapped segment .got will be writen to: vma=0x1e9f38, file_offset=0x1d8f38, size=0x480
+Mapped segment .sdata will be writen to: vma=0x1ea3b8, file_offset=0x1d93b8, size=0x8
+								 >> Debug: uc_engine_set_memory_inputs.
+								 >> Debug: uc_engine_ini

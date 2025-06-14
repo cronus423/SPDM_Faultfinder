@@ -13,7 +13,36 @@
 #include "configuration.h"
 #include "unicorn_engine.h"
 #include "unicorn_consts.h"
+__uint128_t parse_uint128_hex(const char *hex_str) {
+    while (isspace(hex_str)) 
+    {
+        hex_str++;
+    }
+    if (strncmp(hex_str, "0x", 2) == 0 || strncmp(hex_str, "0X", 2) == 0) {
+        hex_str += 2;
+    }
 
+    size_t len = strlen(hex_str);
+    __uint128_t result = 0;
+
+    for (size_t i = 0; i < len; i++) {
+        char c = hex_str[i];
+        uint8_t value;
+
+        if (c >= '0' && c <= '9') value = c - '0';
+        else if (c >= 'a' && c <= 'f') value = c - 'a' + 10;
+        else if (c >= 'A' && c <= 'F') value = c - 'A' + 10;
+        else if (c == '\n') { break; }
+        else {
+            fprintf(stderr, "Invalid hex digit: %c\n", c);
+            exit(1);
+        }
+
+        result = (result << 4) | value;
+    }
+
+    return result;
+}
 void print_equivalence_list(current_run_state_t *current_run_state, uint64_t instruction)
 {
     fprintf(current_run_state->file_fprintf, "****** Equivalence faults for instruction: %llu ******\n", instruction);
@@ -392,7 +421,7 @@ run_list_t *parse(const char *filename)
                 current_instruction_range_fault = new_instruction_range_fault;
                 current_target_fault = NULL;
             }
-            else if ((strncmp(line, "Registers:", 10) == 0) || (strncmp(line, "Registers-force:", 15) == 0) || (strncmp(line, "Instruction:", 11) == 0) || (strncmp(line, "Flags:", 6) == 0) || (strncmp(line, "Instruction Pointer:", 20) == 0))
+            else if ((strncmp(line,"Memory",6)==0)||(strncmp(line, "Registers:", 10) == 0) || (strncmp(line, "Registers-force:", 15) == 0) || (strncmp(line, "Instruction:", 11) == 0) || (strncmp(line, "Flags:", 6) == 0) || (strncmp(line, "Instruction Pointer:", 20) == 0))
             {
                 if (current_instruction_range_fault == NULL)
                 {
@@ -417,7 +446,7 @@ run_list_t *parse(const char *filename)
                 if ((strncmp(line, "Registers", 9) == 0))
                 {
                     new_target_fault->target = reg_ft; // REGISTERS
-                    new_target_fault->register_bit = get_registers_from_line(objects);
+                   
                     new_target_fault->force = false;
                     if ((strncmp(line, "Registers-force", 15) == 0))
                     {
@@ -433,6 +462,11 @@ run_list_t *parse(const char *filename)
                 {
                     new_target_fault->target = instruction_ft;  // Instruction
                     new_target_fault->register_bit = 0; // This isn't relevant for the instruction
+                }
+                else if ((strncmp(line,"Memory",6)==0))
+                {
+                    new_target_fault->target = memory_ft;//Memory
+                    new_target_fault->register_bit = parse_uint128_hex(objects);
                 }
                 else
                 {
@@ -626,6 +660,11 @@ void print_run_list(const run_list_t *run_list)
             else if (current_target_fault->target == instruction_ft)
             {
                 fprintf(f, "  Instruction ");
+            }
+            else if (current_target_fault->target == memory_ft)
+            {
+                fprintf(f, "  Memory: ");
+                fprintf(f, "0x%" PRIx64, (uint64_t)run_list->instruction_range_fault->target_fault_head-> register_bit);
             }
             else
             {

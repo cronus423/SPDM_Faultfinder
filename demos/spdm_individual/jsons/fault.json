@@ -1,0 +1,13 @@
+{
+    "binary json filename"  : "demos/spdm_individual/jsons/binary-details.json",
+    "mode"                  : "fault",
+    "output directory name" : "demos/spdm_individual/outputs/",
+    "threads"               : "1",
+    "fault model filename"  : "demos/spdm_individual/faultmodels/small-riscv.txt",
+    "checkpoints"           : "no",
+    "number of checkpoints" : "notused",
+    "equivalents"           : "no",
+    "timeit"                : "no",
+    "display disassembly"   : "yes",
+    "max instructions"      : "4000000000"
+}   

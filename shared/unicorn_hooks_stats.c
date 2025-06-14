@@ -96,7 +96,7 @@ void convertToUppercase(char *givenStr)
 void hook_code_stats(uc_engine *uc, uint64_t address, uint64_t size, void *user_data)
 {
     #ifdef DEBUG
-        printf_debug("hook_code_stats. Address 0x%" PRIx64 "\n",address);
+        //printf_debug("hook_code_stats. Address 0x%" PRIx64 "\n",address);
     #endif
     current_run_state_t* current_run_state=(current_run_state_t*)user_data; 
     uint64_t num=current_run_state->instruction_count;
@@ -105,7 +105,7 @@ void hook_code_stats(uc_engine *uc, uint64_t address, uint64_t size, void *user_
         return;
     }
     #ifdef DEBUG
-        printf_debug("hook_code_stats - in faulting range. Address: 0x%" PRIx64 "\n",address);
+        //printf_debug("hook_code_stats - in faulting range. Address: 0x%" PRIx64 "\n",address);
     #endif
     /// Save the address to the array 
     current_run_state->line_details_array[num].address=address;
@@ -138,6 +138,7 @@ void hook_code_stats(uc_engine *uc, uint64_t address, uint64_t size, void *user_
         }   
         else
         {
+            cs_option(handle, CS_OPT_DETAIL, CS_OPT_ON);
             uint8_t* tmp=MY_STACK_ALLOC(size * sizeof(uint8_t));
             // Read the line of code (opcode)
             if (!uc_mem_read(uc, address, tmp, size)) 
@@ -146,7 +147,7 @@ void hook_code_stats(uc_engine *uc, uint64_t address, uint64_t size, void *user_
 
                 cs_insn *insn;
                 // Now disassemble this line using capstone and display the mnemonics
-                size_t count=cs_disasm(handle, tmp, size,0x1000,0, &insn);
+                size_t count=cs_disasm(handle, tmp, size,0x1000,1, &insn);
                 if (count >0)
                 {
                     char this_op_str[192];
@@ -168,13 +169,13 @@ void hook_code_stats(uc_engine *uc, uint64_t address, uint64_t size, void *user_
                         }
                     }
                     #ifdef DEBUG
-                        printf_debug("current_registers_used %" PRIx64 "\n",current_registers_used);
+                        //printf_debug("current_registers_used %" PRIx64 "\n",current_registers_used);
                     #endif
                 }
                 else
                 {
                     #ifdef DEBUG
-                        printf_debug("Unable to disassemble.  %" PRIx64 ". \n",current_registers_used);
+                        //printf_debug("Unable to disassemble.  %" PRIx64 ". \n",current_registers_used);
                     #endif 
                 }
                 cs_free (insn,count);

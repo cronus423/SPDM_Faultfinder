@@ -67,7 +67,6 @@ int main(int argc, char **argv, char **envp)
     print_run_file_details(&run_details); 
     load_configuration(run_details.json_filename);
 
-
     current_run_state_t current_run_state={0};
     current_run_state_init(&current_run_state);
 
@@ -90,6 +89,10 @@ int main(int argc, char **argv, char **envp)
         {
             run_list_t* run_list=parse(run_details.fault_model_filename);
             print_run_list(run_list);
+            if(run_list->instruction_range_fault->target_fault_head->target==memory_ft)
+            {
+                current_run_state.fault_rule.faulted_address = (uint64_t)run_list->instruction_range_fault->target_fault_head-> register_bit;
+            }
             fault_it(&current_run_state,run_list,run_details.threads_num);
             free_run_list(run_list);   
             break;

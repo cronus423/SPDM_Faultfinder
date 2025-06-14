@@ -1,0 +1,35 @@
+##### Starting new run. Address: 0x1ce10. Hit: 1. Lifespan: 0. Instruction: 00001149. Faulting Target: Instruction. Mask: 0x0000000000000006. Operation: XOR.  ###
+ >> Fault Address                  :  0x1ce10
+ >> Original Memory                  : ef fb 1a 39 00 12 00 00 
+ >> Mask                           :  0x6
+ >> Updated Memory            :  e9 fb 1a 39 00 12 00 00 
+ >> Run result: reached end address after faulting.
+ >>> Output from register (X10): 0x1.
+##### Starting new run. Address: 0x1ce10. Hit: 1. Lifespan: 0. Instruction: 00001149. Faulting Target: Instruction. Mask: 0x000000000000000c. Operation: XOR.  ###
+ >> Fault Address                  :  0x1ce10
+ >> Original Memory                  : ef fb 1a 39 00 12 00 00 
+ >> Mask                           :  0xc
+ >> Updated Memory            :  e3 fb 1a 39 00 12 00 00 
+ >> Run result: reached end address after faulting.
+ >>> Output from register (X10): 0x1.
+##### Starting new run. Address: 0x1ce10. Hit: 1. Lifespan: 0. Instruction: 00001149. Faulting Target: Instruction. Mask: 0x0000000000000018. Operation: XOR.  ###
+ >> Fault Address                  :  0x1ce10
+ >> Original Memory                  : ef fb 1a 39 00 12 00 00 
+ >> Mask                           :  0x18
+ >> Updated Memory            :  f7 fb 1a 39 00 12 00 00 
+ >> Run result: reached end address after faulting.
+ >>> Output from register (X10): 0x0.
+##### Starting new run. Address: 0x1ce10. Hit: 1. Lifespan: 0. Instruction: 00001149. Faulting Target: Instruction. Mask: 0x0000000000000030. Operation: XOR.  ###
+ >> Fault Address                  :  0x1ce10
+ >> Original Memory                  : ef fb 1a 39 00 12 00 00 
+ >> Mask                           :  0x30
+ >> Updated Memory            :  df fb 1a 39 00 12 00 00 
+ >> Run result: reached end address after faulting.
+ >>> Output from register (X10): 0x1.
+##### Starting new run. Address: 0x1ce10. Hit: 1. Lifespan: 0. Instruction: 00001149. Faulting Target: Instruction. Mask: 0x0000000000000060. Operation: XOR.  ###
+ >> Fault Address                  :  0x1ce10
+ >> Original Memory                  : ef fb 1a 39 00 12 00 00 
+ >> Mask                           :  0x60
+ >> Updated Memory            :  8f fb 1a 39 00 12 00 00 
+ >> Run result: reached end address after faulting.
+ >>> Output from register (X10): 0x1.

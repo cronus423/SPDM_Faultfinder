@@ -52,6 +52,10 @@ void add_hook_code_fault_it_address(uc_engine *uc, current_run_state_t* current_
     {
         my_uc_hook_add("hk_fault_it IP", uc, &current_run_state->hk_fault_it, UC_HOOK_CODE, hook_code_fault_it_IP, current_run_state, address_to_fault, address_to_fault);
     }
+    else if(current_run_state->fault_rule.target == memory_ft)
+    {
+        my_uc_hook_add("hk_fault_it Memory", uc, &current_run_state->hk_fault_it, UC_HOOK_CODE, hook_code_fault_it_memory, current_run_state, address_to_fault,address_to_fault);
+    }
     else
     {
         fprintf(stderr, "Target not found: %s\n", target_to_string(current_run_state->fault_rule.target));

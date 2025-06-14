@@ -70,11 +70,81 @@ void do_the_instruction_fault(uc_engine* uc, current_run_state_t* current_run_st
     current_run_state->run_state=FAULTED_rs;
 }
 
+void do_the_memory_fault(uc_engine* uc, current_run_state_t* current_run_state,uint64_t address,uint64_t size)
+{
+    /*** This is where the faulting actually happens for INSTRUCTIONS ****/
+    uint64_t memory_original;
+    uint64_t memory_new;
+    uc_err error;
+    //uint8_t* new_value;
+    uint64_t target_address_memory_attack;
+    fault_rule_t* this_fault=&current_run_state->fault_rule;
+    // uint64_t target_reg=uc_reg_from_int(this_fault->number);
+    // uc_reg_read(uc, target_reg, &target_address_memory_attack);
+    // target_address_memory_attack=target_address_memory_attack+16+0X2E;
+    target_address_memory_attack = this_fault->faulted_address;
+    //read it
+    error=uc_mem_read(uc,target_address_memory_attack,&memory_original,8);
+    if (error != UC_ERR_OK) 
+    {
+            printf("do_memory_fault_failed-FIA unmapped memory\n");
+            exit(1);
+    }
+    uint8_t* original_value = (uint8_t*)&memory_original;
+    fprintf_output(current_run_state->file_fprintf, "Fault Address                  :  0x%" PRIx64 "\n",address);
+    fprintf_output(current_run_state->file_fprintf, "Original Memory                  : ");
+    for (int i=0;i<8;i++)
+    {
+        fprintf(current_run_state->file_fprintf,"%02x ",original_value[i]);
+    }
+    fprintf_output(current_run_state->file_fprintf, "Mask                           :  0x%" PRIx64 "\n", this_fault->mask);
+    //fault it
+    fault_memory(this_fault->mask, this_fault->operation, memory_original,&memory_new, 8,current_run_state->file_fprintf);
+    error=uc_mem_write(uc,target_address_memory_attack,&memory_new,8);
+    if (error != UC_ERR_OK) 
+    {
+            printf("do_memory_fault_failed-WRITE TO unmapped memory\n");
+            exit(1);
+    }
+    fprintf_output(current_run_state->file_fprintf, "Updated Memory            :  ");
+    uint8_t* new_value = (uint8_t*)&memory_new;
+    for (int i=0;i<8;i++)
+    {
+        fprintf(current_run_state->file_fprintf,"%02x ",new_value[i]);
+    }
+    fprintf(current_run_state->file_fprintf,"\n");
+    // we've done the fault - so set faulting_mode to faulted!!
+    current_run_state->run_state=FAULTED_rs;
+}
+
+
 void my_uc_ctl_remove_cache(uc_engine *uc, uint64_t address_start,uint64_t address_end)
 {   
     address_start-= 0x1;
     address_end+= 0x1;
     uc_ctl_remove_cache(uc, address_start, address_end);
+}
+void hook_code_fault_it_memory(uc_engine *uc, uint64_t address, uint64_t size, void *user_data){
+    current_run_state_t *current_run_state=(current_run_state_t *)user_data;
+#ifdef DEBUG
+        printf_debug("hook_code_fault_it_memory. Address 0x%" PRIx64 ". Count: %li\n", address, current_run_state->instruction_count);
+#endif
+     if (current_run_state->in_fault_range == 0)
+    {
+        return;
+    }
+    if (current_run_state->run_state == FAULTED_rs)
+    {
+        // Don't fault it more than once.
+        return;
+    }
+    if (current_run_state->fault_rule.instruction != current_run_state->instruction_count)
+    {
+        // only fault the specific instruction
+        return;
+    }
+    do_the_memory_fault(uc,current_run_state,address,size);
+    delete_hook_code_fault_it(uc, current_run_state); 
 }
 
 void hook_code_fault_it_instruction(uc_engine *uc, uint64_t address, uint64_t size, void *user_data)

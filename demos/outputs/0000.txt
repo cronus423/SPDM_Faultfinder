@@ -1,0 +1,319 @@
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000001. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000001
+ >> Updated                     : 0x0000000000000001
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000002. Operation: XOR.  ###
+ >! Errored: /ᐠ.ꞈ.ᐟ\  Hmm - writing to unmapped memory, address: 0x20004000, value: 0x0!! Count 0 Skipping to end.
+ >! Failed on uc_emu_start() first run with error returned 7: Invalid memory write (UC_ERR_WRITE_UNMAPPED).
+ >> Run result: fault errored program - last instruction 0.
+ >>> Output from register (X10): 0x20004000.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000004. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000004
+ >> Updated                     : 0x0000000000000004
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000008. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000008
+ >> Updated                     : 0x0000000000000008
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000010. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000010
+ >> Updated                     : 0x0000000000000010
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000020. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000020
+ >> Updated                     : 0x0000000000000020
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000040. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000040
+ >> Updated                     : 0x0000000000000040
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000080. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000080
+ >> Updated                     : 0x0000000000000080
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000100. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000100
+ >> Updated                     : 0x0000000000000100
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000200. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000200
+ >> Updated                     : 0x0000000000000200
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000400. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000400
+ >> Updated                     : 0x0000000000000400
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000000800. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000000800
+ >> Updated                     : 0x0000000000000800
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000001000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000001000
+ >> Updated                     : 0x0000000000001000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000002000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000002000
+ >> Updated                     : 0x0000000000002000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000004000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000004000
+ >> Updated                     : 0x0000000000004000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000008000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000008000
+ >> Updated                     : 0x0000000000008000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000010000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000010000
+ >> Updated                     : 0x0000000000010000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000020000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000020000
+ >> Updated                     : 0x0000000000020000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000040000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000040000
+ >> Updated                     : 0x0000000000040000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000080000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000080000
+ >> Updated                     : 0x0000000000080000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000100000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000100000
+ >> Updated                     : 0x0000000000100000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000200000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000200000
+ >> Updated                     : 0x0000000000200000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000400000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000400000
+ >> Updated                     : 0x0000000000400000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000000800000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000000800000
+ >> Updated                     : 0x0000000000800000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000001000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000001000000
+ >> Updated                     : 0x0000000001000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000002000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000002000000
+ >> Updated                     : 0x0000000002000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000004000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000004000000
+ >> Updated                     : 0x0000000004000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000008000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000008000000
+ >> Updated                     : 0x0000000008000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000010000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000010000000
+ >> Updated                     : 0x0000000010000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000020000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000020000000
+ >> Updated                     : 0x0000000020000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000040000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000040000000
+ >> Updated                     : 0x0000000040000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.
+
+
+
+
+##### Starting new run. Address: 0x50656. Hit: 1. Lifespan: 0. Instruction: 00039993. Faulting Target: Register [FORCE FAULT]. Reg#: X15. Mask: 0x0000000080000000. Operation: XOR.  ###
+ >> Original register           : 0x0000000000000000 
+ >> Mask                        : 0x0000000080000000
+ >> Updated                     : 0x0000000080000000
+Hook intr. Interrupt number: 8 
+ >> Run result: run ended early - system interrupt occurred.

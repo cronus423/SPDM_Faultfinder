@@ -11,7 +11,7 @@
     void print_outputs(uc_engine *uc, current_run_state_t* current_run_state);
     void print_sp_and_pc(uc_engine *uc, current_run_state_t* current_run_state);
     void print_hooks(uc_engine *uc, current_run_state_t* current_run_state);
-    void my_uc_engine_setup                 (uc_engine** uc,current_run_state_t* current_run_state,char* description);
+    void my_uc_engine_setup                 (uc_engine** uc,current_run_state_t* current_run_state,char* description,int debug_personal);
     void my_uc_emu_stop                     (uc_engine* uc);
     void my_uc_engine_start             (uc_engine *uc, current_run_state_t *current_run_state, uint64_t max_instructions);
     uc_err my_uc_close                      (uc_engine* uc, current_run_state_t* current_run_state,char* description);
@@ -77,4 +77,5 @@
     void hook_memory_invalid                (uc_engine *uc, uc_mem_type type, uint64_t address, uint64_t size, uint64_t value, void *user_data);
     bool hook_mem_write                     (uc_engine *uc, uc_mem_type type, uint64_t address, uint64_t size, uint64_t value, void *user_data);
     bool hook_mem_read_after                (uc_engine *uc, uc_mem_type type, uint64_t address, uint64_t size, uint64_t value, void *user_data);
+    void hook_code_fault_it_memory(uc_engine *uc, uint64_t address, uint64_t size, void *user_data);
 #endif
